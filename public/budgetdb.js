@@ -1,7 +1,3 @@
-let db;
-
-const request = indexedDB.open("budget", 1);
-
 const indexedDB =
   window.indexedDB ||
   window.mozIndexedDB ||
@@ -9,12 +5,16 @@ const indexedDB =
   window.msIndexedDB ||
   window.shimIndexedDB;
 
-request.upgradeneeded = ({ target }) => {
+let db;
+
+const request = indexedDB.open("budget", 1);
+
+request.onupgradeneeded = ({ target }) => {
   let db = target.result;
   db.createObjectStore("pending", { autoIncrement: true });
 };
 
-request.success = ({ target }) => {
+request.onsuccess = ({ target }) => {
   db = target.result;
 
   if (navigator.onLine) {
@@ -23,5 +23,5 @@ request.success = ({ target }) => {
 };
 
 request.onerror = function(event) {
-  console.log("Woops! " + event.target.errorCode);
+  console.log("Error! " + event.target.errorCode);
 };

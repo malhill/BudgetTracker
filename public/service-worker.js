@@ -1,9 +1,11 @@
+console.log('hello world');
+
 var CACHE_NAME = "my-site-cache-v1";
 const DATA_CACHE_NAME = "data-cache-v1";
 //cache
 var urlsToCache = [
   "/",
-  "/db.js",
+  "/budgetdb.js",
   "/index.js",
   "/manifest.json",
   "/styles.css",
@@ -58,4 +60,3 @@ self.addEventListener("install", function(event) {
       })
     );
   });
-  
